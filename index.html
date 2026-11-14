@@ -67,6 +67,13 @@ p { text-wrap: pretty; }
 .field::placeholder { color: var(--ink-muted); opacity: 1; }
 .field:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 22%, transparent); }
 .field[aria-invalid="true"] { border-color: #B3261E; }
+.phone-pick { border: 0; padding: 0; margin-top: .8rem; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.phone-pick legend { float: left; margin-right: .3rem; font-weight: 700; color: var(--ink-muted); }
+.phone-pick label { position: relative; cursor: pointer; }
+.phone-pick input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.phone-pick span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.1rem; border-radius: 999px; border: 2px solid var(--outline-faint); background: var(--surface); font-weight: 800; transition: background .2s, border-color .2s; }
+.phone-pick input:checked + span { background: var(--butter); border-color: var(--primary); }
+.phone-pick input:focus-visible + span { outline: 3px solid var(--primary); outline-offset: 2px; }
 .status { min-height: 1.6em; margin-top: .5rem; font-weight: 700; color: var(--ink-muted); }
 .status.err { color: #B3261E; }
 :root[data-theme="dark"] .status.err { color: #F2B8B5; }
@@ -248,7 +255,7 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
       <li><a href="#how">How it helps</a></li>
       <li><a href="#app">See the app</a></li>
       <li><a href="#honest">Honest and careful</a></li>
-      <li class="keep"><a class="tonal" href="signup.html">Create account</a></li>
+      <li class="keep"><a class="tonal" href="signup.html">Get early access</a></li>
     </ul>
   </nav>
 </header>
@@ -259,13 +266,20 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
       <div>
         <h1 id="hero-title">Is it <span class="ask">the coffee?<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 14 C 50 4, 110 18, 196 8"/></svg></span> The <span class="ask">late dinners?<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 10 C 60 18, 130 2, 196 12"/></svg></span> <em>Let's find out together.</em></h1>
         <p class="lede">Tumlii is a simple diary for your tummy. Note down what you eat, how you slept and how your tummy felt. Over time, Tumlii looks back over your days and shows you what your bad tummy days have in common.</p>
-        <form class="waitlist" id="waitlist" novalidate>
+        <form class="waitlist" id="waitlist" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="waitlist">
+          <p hidden><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <label class="sr-only" for="wl-email">Email address</label>
           <div class="row">
             <input class="field" id="wl-email" name="email" type="email" autocomplete="email" placeholder="your@email.com" required>
             <button class="btn" type="submit">Join the waitlist</button>
           </div>
-          <p class="status" id="wl-status" role="status" aria-live="polite">Early release: Android in December, iPhone in January. We'll send you one email when it's ready for your phone.</p>
+          <fieldset class="phone-pick">
+            <legend>My phone is</legend>
+            <label><input type="radio" name="phone" value="android"><span>Android</span></label>
+            <label><input type="radio" name="phone" value="iphone"><span>iPhone</span></label>
+          </fieldset>
+          <p class="status" id="wl-status" role="status" aria-live="polite">Early release: Android in December, iPhone in January. We'll use your email only to tell you when Tumlii is ready for your phone.</p>
         </form>
       </div>
       <div class="hero-buddy bob" aria-hidden="true">
@@ -402,8 +416,8 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
   <section class="band join" id="join" aria-labelledby="join-title">
     <div class="wrap">
       <div>
-        <h2 id="join-title">Start your tummy diary</h2>
-        <p class="intro">Make your account, then start noting down your meals and how you feel. Tumlii starts looking for patterns straight away.</p>
+        <h2 id="join-title">Be first to try Tumlii</h2>
+        <p class="intro">Sign up for early access now. When the early release opens, we'll email you a link to download Tumlii, and you'll set your password in the app.</p>
         <ul>
           <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Note a meal or how you feel in a few taps</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>See what your bad tummy days have in common</li>
@@ -412,7 +426,7 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
           <span><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg>Android <small>December 2026</small></span>
           <span><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 5.5h3"/></svg>iPhone <small>January 2027</small></span>
         </div>
-        <div class="actions"><a class="btn" href="signup.html">Create account</a></div>
+        <div class="actions"><a class="btn" href="signup.html">Get early access</a></div>
       </div>
       <div class="buddy-wrap bob" aria-hidden="true"><div data-buddy="happy"></div></div>
     </div>
@@ -505,7 +519,8 @@ document.querySelectorAll(".hunch").forEach((b) => b.addEventListener("click", (
 show("late");
 
 /* ---------- waitlist: front-end only until an endpoint exists ---------- */
-const WAITLIST_ENDPOINT = ""; // paste a form-service URL here to start collecting sign-ups
+/** Netlify Forms: the form is registered at deploy time from its data-netlify attribute; submissions POST here. */
+const postForm = (form) => fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(form)).toString() });
 $("waitlist").addEventListener("submit", async (e) => {
   e.preventDefault();
   const input = $("wl-email"), status = $("wl-status"), btn = e.target.querySelector("button");
@@ -519,15 +534,11 @@ $("waitlist").addEventListener("submit", async (e) => {
     return;
   }
   input.removeAttribute("aria-invalid");
-  if (!WAITLIST_ENDPOINT) {
-    status.textContent = "Thank you! The waitlist isn't open just yet, so nothing was saved. Please check back soon.";
-    return;
-  }
   btn.disabled = true; btn.textContent = "Joining...";
   try {
-    const r = await fetch(WAITLIST_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({ email }) });
+    const r = await postForm(e.target);
     if (!r.ok) throw new Error(String(r.status));
-    status.textContent = "You're on the list. We'll send one email when early access opens.";
+    status.textContent = "You're on the list. We'll send one email when Tumlii is ready for your phone.";
     e.target.reset();
   } catch {
     status.classList.add("err");

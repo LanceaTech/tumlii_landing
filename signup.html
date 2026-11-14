@@ -47,6 +47,13 @@ main { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
 .hint { color: var(--ink-muted); font-size: .9375rem; }
 fieldset { border: 0; padding: 0; margin: 1.2rem 0 0; }
 legend { font: 600 1.25rem Fredoka, sans-serif; margin-bottom: .6rem; }
+.phone-pick { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.phone-pick legend { float: left; margin: 0 .4rem 0 0; font: 700 1rem Nunito, sans-serif; color: var(--ink-muted); }
+.phone-pick label { position: relative; cursor: pointer; }
+.phone-pick input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.phone-pick span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.1rem; border-radius: 999px; border: 2px solid var(--outline-faint); background: var(--surface); font-weight: 800; }
+.phone-pick input:checked + span { background: var(--butter); border-color: var(--primary); }
+.phone-pick input:focus-visible + span { outline: 3px solid var(--primary); outline-offset: 2px; }
 .ack { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: .8rem; align-items: start; padding: .75rem .2rem; border-top: 2px dashed var(--outline-faint); cursor: pointer; }
 .ack input { width: 24px; height: 24px; margin-top: .15rem; accent-color: var(--primary); cursor: pointer; }
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; width: 100%; margin-top: 1.4rem; border: 0; border-radius: 999px; background: var(--apricot); color: var(--on-apricot); font: 800 1.0625rem Nunito, sans-serif; cursor: pointer; transition: transform .35s var(--spring), opacity .2s; box-shadow: var(--btn-shadow); }
@@ -70,17 +77,22 @@ legend { font: 600 1.25rem Fredoka, sans-serif; margin-bottom: .6rem; }
 </header>
 <main class="wrap">
   <div class="side">
-    <h1>Create your account</h1>
-    <p>Then note down your first meal, or how your tummy feels. Tumlii will start looking for patterns with you.</p>
+    <h1>Get early access</h1>
+    <p>Tell us who you are and agree to the basics now. When the early release opens (Android in December, iPhone in January), we'll email you a link to download Tumlii. You'll set your password in the app.</p>
     <div class="buddy" data-buddy="curious" aria-hidden="true"></div>
   </div>
-  <form class="card" id="signup" novalidate>
+  <form class="card" id="signup" name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+    <input type="hidden" name="form-name" value="early-access">
+    <p hidden><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
     <div class="grid2">
-      <div class="f"><label for="name">Your name</label><input id="name" autocomplete="given-name" required><p class="err" id="name-err"></p></div>
-      <div class="f"><label for="email">Email</label><input id="email" type="email" autocomplete="email" required><p class="err" id="email-err"></p></div>
-      <div class="f"><label for="pw">Password (8 characters or more)</label><input id="pw" type="password" autocomplete="new-password" minlength="8" required><p class="err" id="pw-err"></p></div>
-      <div class="f"><label for="pw2">Password again</label><input id="pw2" type="password" autocomplete="new-password" required><p class="err" id="pw2-err"></p></div>
+      <div class="f"><label for="name">Your name</label><input id="name" name="name" autocomplete="given-name" required><p class="err" id="name-err"></p></div>
+      <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required><p class="err" id="email-err"></p></div>
     </div>
+    <fieldset class="phone-pick">
+      <legend>My phone is</legend>
+      <label><input type="radio" name="phone" value="android"><span>Android</span></label>
+      <label><input type="radio" name="phone" value="iphone"><span>iPhone</span></label>
+    </fieldset>
     <fieldset>
       <legend>Please tick each of these</legend>
       <label class="ack"><input type="checkbox" name="ack" value="not_medical"><span>Tumlii is not medical advice. It doesn't diagnose or treat anything, and it doesn't replace a doctor.</span></label>
@@ -88,9 +100,9 @@ legend { font: 600 1.25rem Fredoka, sans-serif; margin-bottom: .6rem; }
       <label class="ack"><input type="checkbox" name="ack" value="check_food"><span>Food ideas are based only on what I tell Tumlii. It can't check allergens or ingredients, so I'll check labels and my own needs before eating anything.</span></label>
       <label class="ack"><input type="checkbox" name="ack" value="own_risk"><span>I make my own health and food choices, at my own risk. Tumlii is not responsible for any health effects of how I use it.</span></label>
     </fieldset>
-    <button class="btn" type="submit" id="go" disabled>Create my account</button>
+    <button class="btn" type="submit" id="go" disabled>Get early access</button>
     <p class="result" id="result" role="status" aria-live="polite" hidden></p>
-    <p class="small">Not ready for an account? <a href="index.html#waitlist">Join the waitlist</a> and get one email when early access opens.</p>
+    <p class="small">We use your name and email only to tell you when Tumlii is ready, and keep your ticks as a record that you agreed. Just want one email? <a href="index.html#waitlist">Join the waitlist</a> instead.</p>
   </form>
 </main>
 <script>
@@ -106,15 +118,14 @@ const $ = (id) => document.getElementById(id);
 const acks = [...document.querySelectorAll('input[name="ack"]')];
 const sync = () => { $("go").disabled = !acks.every((a) => a.checked); };
 acks.forEach((a) => a.addEventListener("change", sync));
-const SIGNUP_ENDPOINT = ""; // front-end only until accounts have a server (owner, 2026-11-13)
-$("signup").addEventListener("submit", (e) => {
+/** Netlify Forms: no password is ever sent; it is set in the app, where the account lives. */
+const postForm = (form) => fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(form)).toString() });
+$("signup").addEventListener("submit", async (e) => {
   e.preventDefault();
   const v = (id) => $(id).value.trim();
   const errs = {
     name: v("name") ? "" : "Add your name.",
     email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v("email")) ? "" : v("email") ? "That email doesn't look quite right." : "Add your email.",
-    pw: $("pw").value.length >= 8 ? "" : "Use 8 characters or more.",
-    pw2: $("pw2").value && $("pw2").value === $("pw").value ? "" : "The two passwords don't match.",
   };
   let first = null;
   for (const [k, msg] of Object.entries(errs)) {
@@ -123,11 +134,20 @@ $("signup").addEventListener("submit", (e) => {
     if (msg && !first) first = $(k);
   }
   if (first) { first.focus(); return; }
-  const r = $("result");
+  const r = $("result"), go = $("go");
   r.hidden = false;
-  r.textContent = SIGNUP_ENDPOINT
-    ? "Creating your account..."
-    : `Thanks, ${v("name").split(" ")[0]}! Accounts aren't open on the web yet, so nothing was saved. Join the waitlist and we'll tell you the moment you can start.`;
+  r.textContent = "Signing you up...";
+  go.disabled = true;
+  try {
+    const res = await postForm(e.target);
+    if (!res.ok) throw new Error(String(res.status));
+    r.textContent = `Thanks, ${v("name").split(" ")[0]}! You're in. We'll email you when Tumlii is ready for your phone.`;
+    e.target.reset();
+  } catch {
+    r.textContent = "Couldn't sign you up just now. Please try again in a minute.";
+  } finally {
+    sync();
+  }
 });
 </script>
 </body>
