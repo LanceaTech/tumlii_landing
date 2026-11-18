@@ -216,6 +216,8 @@ section.band { padding: clamp(4rem, 9vw, 7.5rem) 0; }
 .faq details { background: var(--surface); border-radius: 24px; padding: .25rem 1.4rem; box-shadow: 0 6px 16px -10px rgba(61, 43, 42, .18); }
 .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 64px; font: 600 1.2rem Fredoka, sans-serif; }
 .faq summary::-webkit-details-marker { display: none; }
+.faq ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+.faq li { margin: .35rem 0; }
 .faq summary::after { content: ""; flex: none; width: 14px; height: 14px; border-right: 3px solid var(--primary); border-bottom: 3px solid var(--primary); transform: rotate(45deg) translateY(-3px); transition: transform .35s var(--spring); }
 .faq details[open] summary::after { transform: rotate(225deg) translateY(-3px); }
 .faq details p { padding-bottom: 1.2rem; color: var(--ink-muted); max-width: 65ch; }
@@ -491,14 +493,25 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
     </div>
   </section>
 
-  <section class="band" aria-labelledby="faq-title">
+  <section class="band" id="faq" aria-labelledby="faq-title">
     <div class="wrap">
       <h2 id="faq-title">Good questions</h2>
       <div class="faq">
         <details><summary>Is Tumlii a medical app?</summary><p>No. Tumlii is a diary. It helps you spot patterns in your own days. It does not diagnose illness, and it does not replace your doctor.</p></details>
+        <details><summary>Does Tumlii give medical or food advice?</summary><p>No. Tumlii and the people who make it are not doctors, dietitians, nutritionists or food-safety experts, and we don't claim to be. What Tumlii shows about food, nutrition, FODMAPs, allergens, pregnancy and food safety is general information from the published sources below. It may not fit you, so check labels and ingredients yourself, and follow your doctor's, dietitian's or midwife's advice first.</p></details>
         <details><summary>How long before it shows me something?</summary><p>It depends on how often you note things down. If Tumlii doesn't have enough days yet, it tells you, instead of guessing.</p></details>
-        <details><summary>Where do Tumlii's answers come from?</summary><p>Answers about you come only from what you've noted down. Good to know answers, like what FODMAP is, are written from published research, and each one links to the study it's based on. They're general information, not medical advice.</p></details>
-        <details><summary>Where is my diary kept?</summary><p>On your phone, locked (encrypted). Tumlii doesn&rsquo;t send your notes anywhere. You can save a backup file and keep it wherever you like.</p></details>
+        <details><summary>Where does Tumlii's information come from?</summary>
+          <p>Patterns and answers about you come only from what you've noted down. Everything else is general information from published sources:</p>
+          <ul>
+            <li><strong>Good to know answers</strong> (what FODMAP is, why wait before lying down): each is written from one published study and links to it.</li>
+            <li><strong>FODMAP notes:</strong> published research (Gibson &amp; Shepherd, 2010; Varney et al., 2017). They're general and haven't been checked for each dish.</li>
+            <li><strong>Food-safety checks on recipes</strong> (such as undercooked kidney beans, home canning or raw egg): published outbreak and toxicology studies, each linked where the check appears.</li>
+            <li><strong>Pregnancy food notes and warning signs:</strong> the NHS pages on foods to avoid in pregnancy, morning sickness, bleeding and stomach pain in pregnancy.</li>
+            <li><strong>Nutrition figures:</strong> USDA FoodData Central (SR Legacy). Figures are rough and only count the ingredients that could be matched.</li>
+            <li><strong>Tumlii's recipes</strong> are written by us. <strong>Community recipes and routines</strong> are shared by people using Tumlii and checked automatically, and sometimes by a person; that doesn't make them right for you.</li>
+          </ul>
+          <p>None of this is medical advice.</p></details>
+        <details><summary>Where is my diary kept?</summary><p>On your phone, locked (encrypted). Tumlii never sends your diary anywhere. If you choose to share a recipe or routine, or to count toward &ldquo;you&rsquo;re not alone&rdquo;, only that reaches our server, without your name, and you can take it back. You can save a backup file and keep it wherever you like. More in our <a href="/privacy.html">privacy policy</a>.</p></details>
         <details><summary>Does it work with my health app?</summary><p>Yes, if you want it to. On Android, Tumlii can read sleep, workouts and weight from Health Connect. On iPhone, it reads the same from Apple Health. It never writes anything back.</p></details>
         <details><summary>When can I start?</summary><p>The early release comes to Android phones in December 2026 and to iPhone in January 2027. Leave your email at the top of this page, and we'll send you one email when it's ready for your phone.</p></details>
       </div>
@@ -510,7 +523,8 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
   <div class="wrap">
     <p class="safety">Chest pain, trouble swallowing, being sick with blood, or black stools? Please see a doctor straight away. Tumlii is not for emergencies.</p>
     <p>Tumlii is a diary, not medical advice. The results shown on this page are examples.</p>
-    <p>&copy; 2026 Tumlii</p>
+    <p><a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/#faq">Where our information comes from</a></p>
+    <p>&copy; 2026 LanceaTech Pte. Ltd.</p>
   </div>
 </footer>
 
