@@ -33,7 +33,7 @@
 
 <h2>What reaches our server</h2>
 <ul>
-  <li><strong>Your account.</strong> We keep your account's email, a scrambled (hashed) copy of your password, a random account id, and which version of our terms you agreed to and when. Each phone you sign in on gets a secret key; we store only a scrambled copy of it. We never see your password itself, and we use your email only for account messages, like a welcome, a password reset link or a deletion link, sent through our email provider (Resend). If you sign in with Google, Google tells us your Google account id, email and name; we keep the id and email to recognise you, and your name stays on your phone. We ask Google for nothing else.</li>
+  <li><strong>Your account.</strong> We keep your account's email, a scrambled (hashed) copy of your password, a random account id, and which version of our terms you agreed to and when. Each phone you sign in on gets a secret key; we store only a scrambled copy of it. We never see your password itself, and we use your email only for account messages, like the code that confirms it's yours, a welcome, a password reset link or a deletion link, sent through our email provider (Resend). If you sign in with Google, Google tells us your Google account id, email and name; we keep the id and email to recognise you, and your name stays on your phone. We ask Google for nothing else.</li>
 </ul>
 <p>And only if you choose:</p>
 <ul>
@@ -42,6 +42,9 @@
   <li><strong>Reports you make</strong> about something shared, with the reason and any note you add.</li>
 </ul>
 <p>Shared recipes and routines are checked automatically, and some are read by a person at Tumlii before they're published. Every publishing decision is logged.</p>
+
+<h2>Crash reports</h2>
+<p>If Tumlii crashes, the app sends a crash report so we can fix it: what went wrong in the app's code (the error and where in the code it happened), the app version, and your phone's make, model and Android version. It never includes your account, your email, your internet address or location, your diary or anything you typed, and no screenshots. Reports go to Sentry, which stores them for us in the United States for up to 90 days. You can turn crash reports off at any time in Profile → Crash reports.</p>
 
 <h2>Early access emails</h2>
 <p>If you leave your email on tumlii.com, it's kept by our website host (Netlify) so we can send you one email when Tumlii is ready for your phone. Ask us and we'll delete it.</p>
@@ -52,9 +55,10 @@
   <li><strong>Cloudflare</strong> passes traffic to it, which means it sees your internet address while a request is made. It also forwards mail sent to our tumlii.com addresses.</li>
   <li><strong>Netlify</strong> hosts tumlii.com and the early access form.</li>
   <li><strong>Google</strong> confirms who you are when you choose Continue with Google.</li>
-  <li><strong>Resend</strong> sends our emails, such as password reset links. It sees the email address and the message.</li>
+  <li><strong>Resend</strong> sends our emails, such as sign-up codes and password reset links. It sees the email address and the message.</li>
+  <li><strong>Sentry</strong> receives crash reports, if you leave them on (see above), and stores them in the United States.</li>
 </ul>
-<p>We don't sell data, show ads, or use third-party analytics or tracking in the app.</p>
+<p>We don't sell data or show ads, and the app has no analytics or tracking. The only report it sends on its own is a crash report, which you can turn off.</p>
 
 <h2>How long we keep things</h2>
 <p>What you share stays until you take it down, turn sharing off, or erase your account. Server logs that show internet addresses are kept for a short time to keep the service running and safe. The audit log of publishing decisions keeps ids and reasons, not your content.</p>
