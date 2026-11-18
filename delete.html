@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delete your account · Tumlii</title>
+<meta name="description" content="Delete your Tumlii account and everything it holds on Tumlii's server, with or without the app.">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FFF6EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1E1615" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="legal.css">
+<style>
+  .card { background: var(--surface); border: 1px solid var(--outline-faint); border-radius: 28px; padding: 1.5rem; max-width: 30rem; }
+  label { display: block; font-weight: 800; margin: 1rem 0 .35rem; }
+  input[type=email] { width: 100%; min-height: 52px; font: inherit; color: var(--ink); background: var(--ground); border: 2px solid var(--outline-faint); border-radius: 16px; padding: .6rem .9rem; }
+  input:focus-visible { border-color: var(--primary); outline: none; }
+  .row { display: flex; align-items: flex-start; gap: .6rem; margin-top: 1rem; }
+  .row input { width: 22px; height: 22px; margin-top: .15rem; flex: none; accent-color: var(--danger); }
+  .row label { margin: 0; font-weight: 700; }
+  button { margin-top: 1.25rem; width: 100%; min-height: 52px; border: 0; border-radius: 999px; font: 800 1.0625rem Nunito, sans-serif; background: var(--primary); color: var(--ground); cursor: pointer; }
+  button.danger { background: var(--danger); color: #fff; }
+  button:disabled { opacity: .6; cursor: default; }
+  .err { color: var(--danger); font-weight: 700; margin: .5rem 0 0; }
+  :root { --danger: #B3261E; }
+  @media (prefers-color-scheme: dark) { :root { --danger: #FFB4AB; } button.danger { color: #3D0B07; } }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header class="wrap nav"><a class="brand" href="/">Tumlii</a><a class="back" href="/">Back to tumlii.com</a></header>
+<main class="wrap doc">
+  <section id="ask-view">
+    <h1>Delete your Tumlii account</h1>
+    <p class="lead">Deleting removes your account, your sign-in and everything you shared from Tumlii's server, for good.</p>
+    <p><strong>Have the app?</strong> Open Tumlii, then Profile → Erase everything. That deletes your account here and your diary on your phone in one go.</p>
+    <p><strong>Without the app:</strong> enter your account's email. We'll send a link to it, so only you can confirm.</p>
+    <form class="card" id="ask" novalidate>
+      <label for="email">Your account's email</label>
+      <input id="email" type="email" autocomplete="email" maxlength="254" required>
+      <p class="err" id="ask-err" role="alert"></p>
+      <button id="ask-go" type="submit">Email me a link</button>
+    </form>
+    <p>Your diary (meals, symptoms, notes) was only ever on your phone, never on our server. Uninstalling Tumlii removes it from your phone.</p>
+  </section>
+  <section id="sent-view" hidden>
+    <h1>Check your email</h1>
+    <p class="lead">If that email has a Tumlii account, a link to delete it is on its way. It works for 60 minutes.</p>
+    <p>Nothing is deleted until you open the link and confirm. Nothing there? Check your spam folder, or write to <a href="mailto:privacy@tumlii.com">privacy@tumlii.com</a>.</p>
+  </section>
+  <section id="confirm-view" hidden>
+    <h1>Delete your account?</h1>
+    <p class="lead">This deletes, from Tumlii's server:</p>
+    <ul>
+      <li>your account and sign-in (email, password or Google link)</li>
+      <li>recipes and routines you shared</li>
+      <li>the food names you counted toward "You're not alone"</li>
+    </ul>
+    <p>Reports you made stay with our reviewers but no longer point to you. It can't be undone; you can always make a new account later.</p>
+    <form class="card" id="confirm" novalidate>
+      <div class="row"><input id="sure" type="checkbox"><label for="sure">I understand my account is deleted for good.</label></div>
+      <p class="err" id="confirm-err" role="alert"></p>
+      <button id="confirm-go" class="danger" type="submit" disabled>Delete my account</button>
+    </form>
+  </section>
+  <section id="done-view" hidden>
+    <h1>Your account is deleted</h1>
+    <p class="lead">Everything Tumlii's server held for it is gone. We've sent a last email to say so.</p>
+    <p>If Tumlii is still on your phone, its diary is still there: use Profile → Erase everything, or uninstall the app, to remove it.</p>
+  </section>
+  <section id="bad-view" hidden>
+    <h1>This link has expired</h1>
+    <p class="lead">Delete links work for 60 minutes, and only until the account is deleted.</p>
+    <p><a href="/delete.html">Ask for a new link</a>. Questions: <a href="mailto:privacy@tumlii.com">privacy@tumlii.com</a>.</p>
+  </section>
+</main>
+<footer class="wrap"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · LanceaTech Pte. Ltd.</footer>
+<script>
+  const API = "https://api.tumlii.com";
+  // a link's token is in the #fragment (never sent to a server log); take it, then clear it from the address bar
+  const token = new URLSearchParams(location.hash.slice(1)).get("t");
+  if (location.hash) history.replaceState(null, "", location.pathname);
+  const $ = (id) => document.getElementById(id);
+  const show = (view) => { for (const v of ["ask-view", "sent-view", "confirm-view", "done-view", "bad-view"]) $(v).hidden = v !== view; };
+  const failText = (status) => status === 429 ? "Too many tries. Please wait a while and try again." : "Something went wrong on our side. Please try again.";
+  if (token) show("confirm-view");
+
+  $("ask").onsubmit = async (e) => {
+    e.preventDefault();
+    const email = $("email").value.trim(), err = $("ask-err"), go = $("ask-go");
+    err.textContent = "";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return (err.textContent = "Enter the email you use for Tumlii.");
+    go.disabled = true; go.textContent = "Sending...";
+    try {
+      const res = await fetch(`${API}/v1/account-deletion`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email }) });
+      if (res.status === 202) return show("sent-view");
+      err.textContent = res.status === 400 ? "Enter the email you use for Tumlii." : failText(res.status);
+    } catch {
+      err.textContent = "Couldn't reach Tumlii. Check your connection and try again.";
+    }
+    go.disabled = false; go.textContent = "Email me a link";
+  };
+
+  $("sure").onchange = (e) => { $("confirm-go").disabled = !e.target.checked; };
+  $("confirm").onsubmit = async (e) => {
+    e.preventDefault();
+    const err = $("confirm-err"), go = $("confirm-go");
+    err.textContent = "";
+    go.disabled = true; go.textContent = "Deleting...";
+    try {
+      const res = await fetch(`${API}/v1/account-deletion/confirm`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ token }) });
+      if (res.status === 204) return show("done-view");
+      if (res.status === 400) return show("bad-view");
+      err.textContent = failText(res.status);
+    } catch {
+      err.textContent = "Couldn't reach Tumlii. Check your connection and try again.";
+    }
+    go.disabled = false; go.textContent = "Delete my account";
+  };
+</script>
+</body>
+</html>
