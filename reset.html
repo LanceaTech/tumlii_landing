@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set a new password · Tumlii</title>
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FFF6EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1E1615" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="legal.css">
+<style>
+  .card { background: var(--surface); border: 1px solid var(--outline-faint); border-radius: 28px; padding: 1.5rem; max-width: 30rem; }
+  label { display: block; font-weight: 800; margin: 1rem 0 .35rem; }
+  input { width: 100%; min-height: 52px; font: inherit; color: var(--ink); background: var(--ground); border: 2px solid var(--outline-faint); border-radius: 16px; padding: .6rem .9rem; }
+  input:focus-visible { border-color: var(--primary); outline: none; }
+  .row { display: flex; align-items: center; gap: .5rem; margin-top: .75rem; }
+  .row input { width: 22px; min-height: 22px; accent-color: var(--primary); }
+  .row label { margin: 0; font-weight: 700; }
+  button { margin-top: 1.25rem; width: 100%; min-height: 52px; border: 0; border-radius: 999px; font: 800 1.0625rem Nunito, sans-serif; background: var(--primary); color: var(--ground); cursor: pointer; }
+  button:disabled { opacity: .6; cursor: default; }
+  .err { color: #B3261E; font-weight: 700; margin: .5rem 0 0; }
+  @media (prefers-color-scheme: dark) { .err { color: #FFB4AB; } }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header class="wrap nav"><a class="brand" href="/">Tumlii</a></header>
+<main class="wrap doc">
+  <section id="form-view">
+    <h1>Set a new password</h1>
+    <p class="updated">For your Tumlii account. Use at least 8 characters.</p>
+    <form class="card" id="form" novalidate>
+      <label for="pw">New password</label>
+      <input id="pw" type="password" autocomplete="new-password" minlength="8" maxlength="200" required>
+      <label for="pw2">New password again</label>
+      <input id="pw2" type="password" autocomplete="new-password" required>
+      <div class="row"><input id="show" type="checkbox"><label for="show">Show passwords</label></div>
+      <p class="err" id="err" role="alert"></p>
+      <button id="go" type="submit">Save new password</button>
+    </form>
+  </section>
+  <section id="done-view" hidden>
+    <h1>Password changed</h1>
+    <p class="lead">Open Tumlii and sign in with your new password.</p>
+    <p>For your safety, Tumlii is signed out on your phones. Your diary is still there: it never left your phone.</p>
+  </section>
+  <section id="bad-view" hidden>
+    <h1>This link has expired</h1>
+    <p class="lead">Reset links work once, for 30 minutes.</p>
+    <p>In Tumlii, tap <strong>Forgot it?</strong> on the sign-in screen to get a new one. Questions: <a href="mailto:support@tumlii.com">support@tumlii.com</a>.</p>
+  </section>
+</main>
+<footer class="wrap"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · LanceaTech Pte. Ltd.</footer>
+<script>
+  const API = "https://tumlii-api.kwelvo.com";
+  // the token is in the #fragment (never sent to a server log); take it, then clear it from the address bar
+  const token = new URLSearchParams(location.hash.slice(1)).get("t");
+  history.replaceState(null, "", location.pathname);
+  const $ = (id) => document.getElementById(id);
+  const show = (view) => { for (const v of ["form-view", "done-view", "bad-view"]) $(v).hidden = v !== view; };
+  if (!token) show("bad-view");
+  $("show").onchange = (e) => { $("pw").type = $("pw2").type = e.target.checked ? "text" : "password"; };
+  $("form").onsubmit = async (e) => {
+    e.preventDefault();
+    const pw = $("pw").value, err = $("err");
+    err.textContent = "";
+    if (pw.length < 8) return (err.textContent = "Use at least 8 characters.");
+    if (pw !== $("pw2").value) return (err.textContent = "The two passwords don't match.");
+    $("go").disabled = true; $("go").textContent = "Saving...";
+    try {
+      const res = await fetch(`${API}/v1/password-reset/confirm`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ token, password: pw }) });
+      if (res.status === 204) return show("done-view");
+      if (res.status === 400) return show("bad-view");
+      err.textContent = res.status === 429 ? "Too many tries. Please wait a while and try again." : "Something went wrong on our side. Please try again.";
+    } catch {
+      err.textContent = "Couldn't reach Tumlii. Check your connection and try again.";
+    }
+    $("go").disabled = false; $("go").textContent = "Save new password";
+  };
+</script>
+</body>
+</html>
