@@ -20,14 +20,14 @@
 <header class="wrap nav"><a class="brand" href="/">Tumlii</a><a class="back" href="/">Back to tumlii.com</a></header>
 <main class="wrap doc">
 <h1>Privacy Policy</h1>
-<p class="updated">Version launch-1 · Effective 24 November 2026</p>
+<p class="updated">Version launch-2 · Effective 24 November 2026</p>
 <p class="lead">Your diary is stored, encrypted, on your phone. We receive it only if you turn on cloud backup. We do not sell personal data, show advertising or use third-party tracking.</p>
 
 <h2>1. Who is responsible for your data</h2>
 <p>LanceaTech Pte. Ltd., a company incorporated in Singapore ("<strong>we</strong>", "<strong>us</strong>"), is the organisation responsible for, and the controller of, personal data processed through the Tumlii app and tumlii.com ("<strong>Tumlii</strong>"). We process personal data in accordance with the Personal Data Protection Act 2012 of Singapore ("<strong>PDPA</strong>") and, where they apply, the General Data Protection Regulation of the European Union and of the United Kingdom ("<strong>GDPR</strong>") and other applicable laws. Our Data Protection Officer can be contacted at <a href="mailto:privacy@tumlii.com">privacy@tumlii.com</a>.</p>
 
 <h2>2. Data that stays on your phone</h2>
-<p>2.1 The following is stored in an encrypted database on your phone and is not transmitted to us unless you turn on cloud backup (section 4.1): meals, symptoms, sleep, stress, weight, medicines you note, routines, recipes, settings, and your answers about age group, allergies, diet, religious food requirements and health. Your name is stored only on your phone and is never transmitted to us by the app, including in a cloud backup.</p>
+<p>2.1 The following is stored in an encrypted database on your phone and is not transmitted to us unless you turn on cloud backup (section 4.1): meals, symptoms, sleep, stress, weight, calorie settings and goals (section 4.5A), medicines you note, routines, recipes, settings, and your answers about age group, allergies, diet, religious food requirements and health. Your name is stored only on your phone and is never transmitted to us by the app, including in a cloud backup.</p>
 <p>2.2 If you connect Apple Health or Health Connect, Tumlii reads sleep, exercise and weight on your phone. It never writes to them. Data read from Apple Health or Health Connect is never transmitted to us, is excluded from cloud backups, and is never used for advertising or disclosed to any third party.</p>
 <p>2.3 A backup file, spreadsheet or summary that you choose to save or send goes wherever you put it, and is then under your control.</p>
 
@@ -36,29 +36,37 @@
   <li><strong>Account data:</strong> your email address; a cryptographic hash of your password (never the password); a random account identifier; the version of the Terms you accepted and when; and a hash of the session key of each phone you are signed in on.</li>
   <li><strong>Sign in with Google:</strong> your Google account identifier and email. Your name is received by the app and kept on your phone only.</li>
   <li><strong>Sign in with Apple:</strong> your Apple account identifier, your email or Apple's private relay address, and a token used solely to withdraw the sign-in when you delete your account. Your name, if you share it, is kept on your phone only.</li>
+  <li><strong>Use of limits:</strong> your plan and trial dates, and for each meal photo read, the time and whether it was read twice. Records of photos read are deleted after 62 days. They contain nothing of the photo.</li>
   <li><strong>Technical data:</strong> your internet address and the requests your phone makes, in short-lived server logs, to operate and secure the service.</li>
 </ul>
 
 <h2>4. Data we process only if you choose</h2>
 <p>4.1 <strong>Cloud backup</strong> (off by default). One encrypted copy of your diary, including the data in section 2.1 other than your name, so that it can be restored when you sign in. It excludes photos and data read from Apple Health or Health Connect. It is encrypted in transit and at rest; our server holds the key, which is what allows us to restore it to you. Turning cloud backup off stops further copies; the last copy remains until you delete your account.</p>
-<p>4.2 <strong>Meal photos</strong> (only when you take or select one, after you agree in the app). The photo is sent to our server, passed once to Anthropic, PBC to suggest what it contains, and discarded by us when the request ends. We do not store it. Under its commercial terms Anthropic does not use it to train its models, and may retain it for up to 30 days to operate and protect its service, or longer where its usage policies are breached or the law requires.</p>
+<p>4.2 <strong>Meal photos</strong> (only when you take or select one, after you agree in the app). The photo is sent to our server, passed once to Anthropic, PBC to suggest what it contains, and discarded by us when the request ends. We do not store it. Your phone first checks, without sending anything, whether the photo is clear and shows food. When you correct a suggestion, the name you gave, a short description and a small copy of the photo are kept on your phone only, outside any backup, and are sent with later photos so that the food can be recognised again; we do not store them. Under its commercial terms Anthropic does not use it to train its models, and may retain it for up to 30 days to operate and protect its service, or longer where its usage policies are breached or the law requires.</p>
 <p>4.3 <strong>"You're not alone" counts.</strong> The catalogue names of dishes your entries flagged, without dates, amounts or symptoms. Counts are shown only where at least 20 people contribute.</p>
 <p>4.4 <strong>Published content.</strong> Recipes and routines you publish, shown without your name, and the results of our checks. Reports you make, and people whose content you choose to hide.</p>
 <p>4.5 <strong>Crash reports</strong> (on by default; turn off in Profile). The error, where in the app's code it happened, the app version, and your phone's make, model and operating system version. They contain no account, email, diary entries or screenshots.</p>
+<p>4.5A <strong>Weight and calories</strong> (off by default). Your sex, year of birth, height, weight, activity, whether you are pregnant or breastfeeding, and your goal, used to estimate your body mass index and energy needs. These are kept on your phone and, if you turn it on, in your cloud backup. We do not otherwise receive them.</p>
+<p>4.5B <strong>Purchases.</strong> If you buy a plan, Apple or Google processes your payment; we do not receive your card details. RevenueCat and we receive your random account identifier, the product, and the dates and status of the purchase, so that we can provide the plan.</p>
+<p>4.5C <strong>Referrals.</strong> Your referral code; which account invited you, if you enter a code; and the fact and date that a first meal was recorded, without any detail of it.</p>
 <p>4.6 <strong>Early access list.</strong> Your email, if you leave it on tumlii.com.</p>
 
 <h2>5. Purposes and legal bases</h2>
 <ul>
   <li><strong>Providing your account and the functions you ask for</strong> (section 3): performance of our contract with you.</li>
   <li><strong>Cloud backup, meal photos and shared counts</strong> (sections 4.1 to 4.3), which may reveal health data, religious beliefs or pregnancy: your explicit consent, given when you turn on or use the function. You may withdraw it at any time by turning the function off or by deleting your account; withdrawal does not affect earlier processing.</li>
+  <li><strong>Plans, purchases, the free trial, referrals and limits of use</strong> (sections 3, 4.5B and 4.5C): performance of our contract, and our legitimate interest in preventing abuse.</li>
+  <li><strong>Weight and calories</strong> (section 4.5A), to the extent we process them in a cloud backup: your explicit consent, as for cloud backup.</li>
+  <li><strong>Non-personalised advertising in the free version</strong> (section 6): our legitimate interest in funding the free version and, where the law requires it, your consent, which you may change in Profile.</li>
   <li><strong>Publishing, checking and moderating content</strong> (section 4.4): performance of our contract, and our legitimate interest in keeping Tumlii lawful and safe to use.</li>
   <li><strong>Security, preventing misuse and fixing faults</strong> (technical data and section 4.5): our legitimate interests. You may object, and may turn crash reports off.</li>
   <li><strong>Service messages</strong> (codes, welcome, password reset, deletion): performance of our contract. <strong>Early access email</strong>: your consent.</li>
   <li><strong>Complying with the law</strong>, and establishing or defending legal claims, where necessary.</li>
 </ul>
-<p>We do not use your data for advertising or profiling that produces legal or similarly significant effects. Published content is checked automatically, and you may ask for a person to review the outcome.</p>
+<p>We do not use your diary, health data, body details or photos for advertising, and do not carry out profiling that produces legal or similarly significant effects. Published content is checked automatically, and you may ask for a person to review the outcome.</p>
 
 <h2>6. Who receives data</h2>
+<p>The free version shows non-personalised advertisements supplied by Google AdMob, which processes your device and advertising identifiers, internet address and information about the advertisements shown, subject to your choices in the consent form where one applies. No diary or health information is given to it.</p>
 <p>We do not sell personal data, or share it for cross-context behavioural advertising. We disclose it only to service providers acting on our instructions, and where the law requires or permits:</p>
 <ul>
   <li><strong>Vultr</strong>: server hosting in Singapore.</li>
@@ -66,7 +74,9 @@
   <li><strong>Resend</strong>: sending our emails (United States).</li>
   <li><strong>Sentry</strong>: crash reports (United States).</li>
   <li><strong>Anthropic</strong>: reading a meal photo you send (United States).</li>
-  <li><strong>Google</strong> and <strong>Apple</strong>: confirming your identity, if you choose to sign in with them. Our website also loads fonts from Google, which receives your internet address when you visit it.</li>
+  <li><strong>RevenueCat</strong>: managing purchases (United States).</li>
+  <li><strong>Google AdMob</strong>: advertising in the free version (United States and other countries).</li>
+  <li><strong>Google</strong> and <strong>Apple</strong>: payments for plans, and confirming your identity, if you choose to sign in with them. Our website also loads fonts from Google, which receives your internet address when you visit it.</li>
   <li><strong>Netlify</strong>: hosting tumlii.com and the early access form (United States).</li>
 </ul>
 <p>If our business is reorganised or transferred, personal data may be transferred to the successor, subject to this policy.</p>
@@ -79,6 +89,7 @@
   <li><strong>Account data and published content:</strong> until you remove it or delete your account. Deletion from our live systems is immediate.</li>
   <li><strong>Cloud backup:</strong> until you delete your account. When you delete it you choose whether the copy is deleted immediately, or kept for 90 days so that it can be restored if you return with the same email, or the same Google or Apple account, and then deleted permanently. During those 90 days it is identified only by a keyed hash. You may ask us to delete it sooner.</li>
   <li><strong>Encrypted backups of our server's database:</strong> up to 90 days, after which they are deleted. They may contain data from an account deleted during that time, and are used only to recover from a failure.</li>
+  <li><strong>Plan, trial and referral records:</strong> until you delete your account. <strong>Purchase records</strong> held by Apple, Google and RevenueCat are kept under their own policies, and we keep what tax and accounting law requires. <strong>Records of meal photos read:</strong> 62 days.</li>
   <li><strong>Server logs:</strong> a short period, limited by size. <strong>Crash reports:</strong> up to 90 days.</li>
   <li><strong>Moderation records:</strong> identifiers and reasons, without the content, for as long as needed to enforce our Terms and to meet legal obligations. Reports you made remain but no longer identify you after you delete your account.</li>
   <li><strong>Early access email:</strong> until the launch email is sent or you ask us to delete it.</li>
@@ -96,10 +107,10 @@
 <p>In the app: Profile, Your data, Erase everything. Without the app: <a href="/delete.html">tumlii.com/delete.html</a>, where we email a link to the address on your account. Deletion removes your account, sign-in details and published content from our live systems immediately, withdraws Sign in with Apple, and, in the app, erases the diary on your phone. If you have a cloud backup, you choose whether it is deleted immediately or kept for 90 days (section 8).</p>
 
 <h2>12. Children</h2>
-<p>Tumlii is for people aged 13 and over. We ask for an age group before an account is made, and do not knowingly collect personal data from anyone under 13. If we learn that we have, we will delete it. People under 18 need the consent of a parent or legal guardian. A parent or guardian may contact us at <a href="mailto:privacy@tumlii.com">privacy@tumlii.com</a>.</p>
+<p>Tumlii is for people aged 13 and over. We ask for an age group before an account is made, and do not knowingly collect personal data from anyone under 13. If we learn that we have, we will delete it. People under 18 need the consent of a parent or legal guardian. They are not offered calorie goals, and advertisements requested for them are marked as for users under the age of consent. A parent or guardian may contact us at <a href="mailto:privacy@tumlii.com">privacy@tumlii.com</a>.</p>
 
 <h2>13. Additional information for residents of certain United States states</h2>
-<p>Consumer health data: the categories we collect are those in sections 4.1 to 4.3, from you, with your consent and for the purposes in section 5; they are disclosed only to the service providers in section 6, and are not sold. You may confirm, access, withdraw consent to, and delete that data as described in sections 10 and 11. If we decline a request, you may appeal by replying to our decision, and may contact your state's attorney general.</p>
+<p>Consumer health data: the categories we collect are those in sections 4.1 to 4.3 and, in a cloud backup, 4.5A, from you, with your consent and for the purposes in section 5; they are disclosed only to the service providers in section 6, and are not sold. You may confirm, access, withdraw consent to, and delete that data as described in sections 10 and 11. If we decline a request, you may appeal by replying to our decision, and may contact your state's attorney general.</p>
 
 <h2>14. Changes to this policy</h2>
 <p>We may update this policy. If a change is material, we will ask for your agreement in the app before it applies to you. If a translation differs from the English version, the English version prevails to the extent the law allows.</p>

@@ -194,6 +194,21 @@ section.band { padding: clamp(4rem, 9vw, 7.5rem) 0; }
 .release span { display: inline-flex; align-items: center; gap: .55rem; min-height: 44px; padding: 0 1rem; border-radius: 999px; background: var(--surface); font-weight: 800; }
 .release svg { width: 1.2rem; height: 1.2rem; stroke: var(--primary); stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .release small { font-weight: 700; color: var(--ink-muted); font-size: .9375rem; }
+/* plans */
+.plans { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.plan-table { background: var(--surface); border-radius: clamp(24px, 3vw, 36px); padding: clamp(1rem, 2.4vw, 2rem); box-shadow: var(--shadow); }
+.plan-table table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.plan-table th, .plan-table td { padding: .85rem .5rem; text-align: center; border-top: 2px dashed var(--outline-faint); }
+.plan-table thead th, .plan-table thead td { border-top: 0; padding-top: .2rem; font: 600 1.35rem Fredoka, Nunito, sans-serif; vertical-align: bottom; }
+.plan-table thead small { display: block; font: 700 .875rem/1.3 Nunito, sans-serif; color: var(--ink-muted); }
+.plan-table tbody th { text-align: left; font-weight: 700; padding-left: 0; }
+.plan-table tbody td { font-weight: 700; color: var(--ink-muted); }
+.plan-table tbody td:last-child, .plan-table thead th:last-child { background: var(--butter); color: var(--ink); }
+.plan-table thead th:last-child { border-radius: 18px 18px 0 0; } .plan-table thead th:last-child small { color: inherit; }
+.plan-table tbody tr:last-child td:last-child { border-radius: 0 0 18px 18px; }
+.plan-note { margin-top: 1rem; font-size: .9375rem; color: var(--ink-muted); }
+@media (max-width: 860px) { .plans { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .plan-table th, .plan-table td { padding: .7rem .25rem; font-size: .9375rem; } .plan-table thead th { font-size: 1.1rem; } .plan-table thead small { font-size: .8125rem; } }
 /* honest by design */
 .honest-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(2rem, 5vw, 5rem); }
 .promise { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 1rem; padding: 1.4rem 0; border-top: 2px dashed var(--outline-faint); }
@@ -263,6 +278,7 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
       <li><a href="#how">How it helps</a></li>
       <li><a href="#app">See the app</a></li>
       <li><a href="#honest">Honest and careful</a></li>
+      <li><a href="#plans">Plans</a></li>
       <li class="keep"><a class="tonal" href="signup.html">Get early access</a></li>
     </ul>
   </nav>
@@ -373,6 +389,14 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
           </div>
           <div class="stage reveal"><figure class="phone side left"><div class="screen"><div class="island"></div><div class="bar-top" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 64 14"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/><path d="M30 4.6a9 9 0 0 1 12 0l-1.6 1.7a6.7 6.7 0 0 0-8.8 0zM32.7 7.4a5 5 0 0 1 6.6 0L36 11z"/><rect x="46" y="1.5" width="15" height="11" rx="3" fill="none" stroke="#2B1F1D" stroke-width="1.4"/><rect x="48" y="3.5" width="11" height="7" rx="1.6"/><rect x="62" y="5" width="1.6" height="4" rx=".8"/></svg></div><img src="assets/screens/log-meal.webp" width="540" height="1102" alt="Log a meal screen: recent meals to log again, a search box and dish groups" loading="lazy" decoding="async"></div></figure><figure class="phone front"><div class="screen"><div class="island"></div><div class="bar-top" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 64 14"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/><path d="M30 4.6a9 9 0 0 1 12 0l-1.6 1.7a6.7 6.7 0 0 0-8.8 0zM32.7 7.4a5 5 0 0 1 6.6 0L36 11z"/><rect x="46" y="1.5" width="15" height="11" rx="3" fill="none" stroke="#2B1F1D" stroke-width="1.4"/><rect x="48" y="3.5" width="11" height="7" rx="1.6"/><rect x="62" y="5" width="1.6" height="4" rx=".8"/></svg></div><img src="assets/screens/log-feel.webp" width="540" height="1102" alt="Log how I feel screen: large tiles such as heartburn, burping and bloating" loading="lazy" decoding="async"></div></figure></div>
         </article>
+        <article class="feature" style="--tint:var(--lilac)">
+          <div class="copy">
+            <h3>Snap your meal</h3>
+            <p>Take a photo and Tumlii suggests the dish and what&rsquo;s usually in it. You check it before anything is saved. If it gets a dish wrong, tell it once: it keeps a small copy on your phone and compares it with your next photo. A photo that&rsquo;s blurry or shows no food isn&rsquo;t sent.</p>
+            <span class="you"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>3 photos a day, free</span>
+          </div>
+          <div class="stage reveal"><figure class="phone front"><div class="screen"><div class="island"></div><div class="bar-top" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 64 14"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/><path d="M30 4.6a9 9 0 0 1 12 0l-1.6 1.7a6.7 6.7 0 0 0-8.8 0zM32.7 7.4a5 5 0 0 1 6.6 0L36 11z"/><rect x="46" y="1.5" width="15" height="11" rx="3" fill="none" stroke="#2B1F1D" stroke-width="1.4"/><rect x="48" y="3.5" width="11" height="7" rx="1.6"/><rect x="62" y="5" width="1.6" height="4" rx=".8"/></svg></div><img src="assets/screens/photo-meal.webp" width="540" height="1102" alt="A meal filled in from a photo: mee siam, with mee rebus and mee goreng offered instead, and its ingredients" loading="lazy" decoding="async"></div></figure></div>
+        </article>
         <article class="feature" style="--tint:var(--butter)">
           <div class="copy">
             <h3>See what your rough days have in common</h3>
@@ -423,6 +447,22 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
         </article>
         <article class="feature" style="--tint:var(--butter)">
           <div class="copy">
+            <h3>How much is in it, roughly</h3>
+            <p>Every meal you log can show a likely calorie figure, what it adds up from, and how much of each ingredient makes a normal serving for someone like you. Type the grams if you know them, and it gets closer. It&rsquo;s always an estimate, and it says how wide.</p>
+            <span class="you"><svg viewBox="0 0 24 24"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3.4 2-4.2.2 1.4.9 2.2 1.8 2.4C10.300 8.500 10.800 5.500 12 3z"/></svg>Part of Tumlii Plus and Pro</span>
+          </div>
+          <div class="stage reveal"><figure class="phone side left"><div class="screen"><div class="island"></div><div class="bar-top" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 64 14"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/><path d="M30 4.6a9 9 0 0 1 12 0l-1.6 1.7a6.7 6.7 0 0 0-8.8 0zM32.7 7.4a5 5 0 0 1 6.6 0L36 11z"/><rect x="46" y="1.5" width="15" height="11" rx="3" fill="none" stroke="#2B1F1D" stroke-width="1.4"/><rect x="48" y="3.5" width="11" height="7" rx="1.6"/><rect x="62" y="5" width="1.6" height="4" rx=".8"/></svg></div><img src="assets/screens/calories-meal.webp" width="540" height="1102" alt="A chicken rice meal: likely 600 kcal, about 38 percent of the day" loading="lazy" decoding="async"></div></figure><figure class="phone front"><div class="screen"><div class="island"></div><div class="bar-top" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 64 14"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/><path d="M30 4.6a9 9 0 0 1 12 0l-1.6 1.7a6.7 6.7 0 0 0-8.8 0zM32.7 7.4a5 5 0 0 1 6.6 0L36 11z"/><rect x="46" y="1.5" width="15" height="11" rx="3" fill="none" stroke="#2B1F1D" stroke-width="1.4"/><rect x="48" y="3.5" width="11" height="7" rx="1.6"/><rect x="62" y="5" width="1.6" height="4" rx=".8"/></svg></div><img src="assets/screens/calories-adds-up.webp" width="540" height="1102" alt="How 600 kcal adds up: rice, chicken, oil and the rest, each with its normal grams" loading="lazy" decoding="async"></div></figure></div>
+        </article>
+        <article class="feature" style="--tint:var(--mint)">
+          <div class="copy">
+            <h3>A weight goal within limits</h3>
+            <p>If you want, Tumlii works out your BMI and the calories that keep your weight, and again each time you weigh in. Pick a weekly goal and it gives you a daily figure. It won&rsquo;t offer goals faster than health services advise, or any goal to someone who is pregnant, near underweight or under 18.</p>
+            <span class="you"><svg viewBox="0 0 24 24"><path d="M5 20h14l-1.500-13h-11z"/><path d="M9 11a3 3 0 0 1 6 0"/></svg>Off unless you turn it on</span>
+          </div>
+          <div class="stage reveal"><figure class="phone front"><div class="screen"><div class="island"></div><div class="bar-top" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 64 14"><rect x="0" y="9" width="3" height="5" rx="1"/><rect x="5" y="6" width="3" height="8" rx="1"/><rect x="10" y="3" width="3" height="11" rx="1"/><rect x="15" y="0" width="3" height="14" rx="1"/><path d="M30 4.6a9 9 0 0 1 12 0l-1.6 1.7a6.7 6.7 0 0 0-8.8 0zM32.7 7.4a5 5 0 0 1 6.6 0L36 11z"/><rect x="46" y="1.5" width="15" height="11" rx="3" fill="none" stroke="#2B1F1D" stroke-width="1.4"/><rect x="48" y="3.5" width="11" height="7" rx="1.6"/><rect x="62" y="5" width="1.6" height="4" rx=".8"/></svg></div><img src="assets/screens/weight-goal.webp" width="540" height="1102" alt="Weight and calories: today&#39;s weight, BMI 25.9 and about 1,870 kcal a day" loading="lazy" decoding="async"></div></figure></div>
+        </article>
+        <article class="feature" style="--tint:var(--butter)">
+          <div class="copy">
             <h3>Gentle alarms around your meals</h3>
             <p>Tumlii can ring after you eat: when it&rsquo;s okay to lie down, a good time for a walk, or a nudge at your usual mealtimes asking if you&rsquo;ve eaten. You choose the times and the sound.</p>
             <span class="you"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="7"/><path d="M12 10v3l2 2M5 4 3 6M19 4l2 2"/></svg>Reminders that fit your day</span>
@@ -449,7 +489,7 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
         <div class="promise"><span class="mark" style="background:var(--mint)"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span><div><h3>Patterns, not answers</h3><p>Tumlii says things like "these often go together". It never tells you what is wrong, and never calls a food good or bad.</p></div></div>
         <div class="promise"><span class="mark" style="background:var(--unknown);border:2px dashed var(--unknown-edge)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" stroke-dasharray="3 3"/></svg></span><div><h3>Blank days stay blank</h3><p>If you didn't note a day down, Tumlii doesn't count it as a good day.</p></div></div>
         <div class="promise"><span class="mark" style="background:var(--sky)"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span><div><h3>You can see the numbers</h3><p>Each result shows how many days it is based on, so you can decide for yourself.</p></div></div>
-        <div class="promise"><span class="mark" style="background:var(--butter)"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><div><h3>Your diary stays on your phone</h3><p>Your notes are kept locked (encrypted) on your phone. Backups are files you keep yourself.</p></div></div>
+        <div class="promise"><span class="mark" style="background:var(--butter)"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><div><h3>Your diary stays on your phone</h3><p>Your notes are kept locked (encrypted) on your phone. They leave it only if you back them up, share something, or send a meal photo to be read.</p></div></div>
         <div class="promise"><span class="mark" style="background:var(--peach)"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/></svg></span><div><h3>Your food rules come first</h3><p>Allergies, religious and diet rules are checked before anything else, and your history never overrides them.</p></div></div>
         <div class="promise"><span class="mark" style="background:var(--lilac)"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></span><div><h3>Second chances</h3><p>If a food that once stood out keeps going fine for you, Tumlii stops calling it worth watching.</p></div></div>
       </div>
@@ -471,13 +511,37 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
     </div>
   </section>
 
+  <section class="band" id="plans" aria-labelledby="plans-title">
+    <div class="wrap plans">
+      <div>
+        <h2 id="plans-title">Start with a free week of everything</h2>
+        <p class="intro">Every new account gets seven days of Tumlii Pro. You don&rsquo;t give a card, so nothing is charged. After that you&rsquo;re on Free, unless you pick a plan.</p>
+        <p class="intro">Know someone who&rsquo;d use it? When a friend joins with your code and logs a meal, you get one more week of Pro.</p>
+      </div>
+      <div class="plan-table">
+        <table>
+          <caption class="sr-only">What each plan holds</caption>
+          <thead><tr><td></td><th scope="col">Free</th><th scope="col">Plus<small>US$2.99 a month</small></th><th scope="col">Pro<small>US$4.99 a month</small></th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Diary, insights, recipes and alarms</th><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+            <tr><th scope="row">Meal photos a day</th><td>3</td><td>5</td><td>10</td></tr>
+            <tr><th scope="row">A second look at hard photos</th><td>No</td><td>Yes</td><td>Yes</td></tr>
+            <tr><th scope="row">Calories and weight goals</th><td>No</td><td>Yes</td><td>Yes</td></tr>
+            <tr><th scope="row">Ads</th><td>Yes</td><td>None</td><td>None</td></tr>
+          </tbody>
+        </table>
+        <p class="plan-note">Plans renew each month until you cancel them in your Apple or Google account. Prices can differ by country.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="band join" id="join" aria-labelledby="join-title">
     <div class="wrap">
       <div>
         <h2 id="join-title">Be first to try Tumlii</h2>
         <p class="intro">Sign up for early access now. When the early release opens, we'll email you a link to download Tumlii, and you'll set your password in the app.</p>
         <ul>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Note a meal or how you feel in a few taps</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Note a meal in a few taps, or with a photo</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>See what your bad tummy days have in common</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Ask Tumlii about your days, with answers from published research</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Try one small change for two weeks and see how it compared</li>
@@ -507,11 +571,14 @@ footer .safety { background: var(--container); color: var(--ink); border-radius:
             <li><strong>FODMAP notes:</strong> published research (Gibson &amp; Shepherd, 2010; Varney et al., 2017). They're general and haven't been checked for each dish.</li>
             <li><strong>Food-safety checks on recipes</strong> (such as undercooked kidney beans, home canning or raw egg): published outbreak and toxicology studies, each linked where the check appears.</li>
             <li><strong>Pregnancy food notes and warning signs:</strong> the NHS pages on foods to avoid in pregnancy, morning sickness, bleeding and stomach pain in pregnancy.</li>
-            <li><strong>Nutrition figures:</strong> USDA FoodData Central (SR Legacy). Figures are rough and only count the ingredients that could be matched.</li>
+            <li><strong>Nutrition and calories:</strong> USDA FoodData Central. Figures are rough and only count the ingredients that could be matched. Energy needs use the Mifflin-St Jeor formula (1990); weekly limits follow the <a href="https://www.cdc.gov/healthy-weight-growth/losing-weight/index.html">CDC</a> and the NHS; BMI ranges are the <a href="https://www.who.int/data/gho/data/themes/topics/topic-details/GHO/body-mass-index">WHO&rsquo;s</a>.</li>
             <li><strong>Tumlii's recipes</strong> are written by us. <strong>Community recipes and routines</strong> are shared by people using Tumlii and checked automatically, and sometimes by a person; that doesn't make them right for you.</li>
           </ul>
           <p>None of this is medical advice.</p></details>
         <details><summary>Where is my diary kept?</summary><p>On your phone, locked (encrypted). Tumlii never sends your diary anywhere unless you turn on cloud backup, which keeps one encrypted copy so it comes back on a new phone. If you choose to share a recipe or routine, or to count toward &ldquo;you&rsquo;re not alone&rdquo;, only that reaches our server, without your name, and you can take it back. You can save a backup file and keep it wherever you like. More in our <a href="/privacy.html">privacy policy</a>.</p></details>
+        <details><summary>What happens to my meal photos?</summary><p>Your phone first checks that the photo is clear and shows food. If it is, and you&rsquo;ve agreed, it goes to our server and is read once by an AI model (Claude, made by Anthropic) to suggest what&rsquo;s in it. We don&rsquo;t keep it. Anthropic doesn&rsquo;t train its models on it and may hold it for up to 30 days. Small copies of foods you teach Tumlii stay on your phone, in no backup, and go along with later photos so it can compare them.</p></details>
+        <details><summary>How sure are the calories?</summary><p>They&rsquo;re estimates, and the app shows how wide. They add up what&rsquo;s usually in a dish, or the grams you type in. They&rsquo;re not medical or dietary advice. If you have, or have had, an eating disorder, or a condition such as diabetes, talk to your doctor before using a calorie goal.</p></details>
+        <details><summary>What does Tumlii cost?</summary><p>The diary is free, with ads. Tumlii Plus (US$2.99 a month) and Tumlii Pro (US$4.99 a month) take the ads away, add calories and weight goals, and read more photos. Every new account starts with a free week of Pro, without a card. See <a href="#plans">plans</a>.</p></details>
         <details><summary>Does it work with my health app?</summary><p>Yes, if you want it to. On Android, Tumlii can read sleep, workouts and weight from Health Connect. On iPhone, it reads the same from Apple Health. It never writes anything back.</p></details>
         <details><summary>When can I start?</summary><p>The early release comes to Android phones in December 2026 and to iPhone in January 2027. Leave your email at the top of this page, and we'll send you one email when it's ready for your phone.</p></details>
       </div>
