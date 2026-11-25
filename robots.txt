@@ -1,0 +1,5 @@
+# Search engines and AI assistants are welcome to read and quote these pages.
+User-agent: *
+Allow: /
+
+Sitemap: https://tumlii.com/sitemap.xml
